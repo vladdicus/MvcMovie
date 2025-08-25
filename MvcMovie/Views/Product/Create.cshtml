@@ -1,0 +1,43 @@
+﻿@* this was made to be the form post with a tag helper, as stated in the assignment requirements *@
+@model MvcMovies.Models.Product
+
+@{
+    ViewData["Title"] = "Add Movie";
+}
+
+<h1>Add a New Movie</h1>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Genre" class="form-label"></label>
+        <input asp-for="Genre" class="form-control" />
+        <span asp-validation-for="Genre" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CopiesAvailable" class="form-label"></label>
+        <input asp-for="CopiesAvailable" class="form-control" />
+        <span asp-validation-for="CopiesAvailable" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="RentalPrice" class="form-label"></label>
+        <input asp-for="RentalPrice" class="form-control" />
+        <span asp-validation-for="RentalPrice" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Movie</button>
+    <a asp-controller="Product" asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

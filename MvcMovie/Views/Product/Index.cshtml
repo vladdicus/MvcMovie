@@ -1,0 +1,44 @@
+﻿@model System.Collections.Generic.List<MvcMovies.Models.Product>
+
+@{
+    ViewData["Title"] = "Movie Rentals";
+}
+
+<h1>Movie Rentals</h1>
+
+<p>
+    @* navigation tag helper to the create action *@
+    <a asp-controller="Product" asp-action="Create">Add New Movie</a>
+    |
+    @* navigation tag helper back to home index if desired *@
+    <a asp-controller="Home" asp-action="Index">Home</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Copies Available</th>
+            <th>Rental Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @* loop through the model and print out each movie's details *@
+        @{
+            for (int i = 0; i < Model.Count; i++)
+            {
+                var currentMovie = Model[i];
+                <tr>
+                    <td>@currentMovie.Id</td>
+                    <td>@currentMovie.Title</td>
+                    <td>@currentMovie.Genre</td>
+                    <td>@currentMovie.CopiesAvailable</td>
+                    <td>$@currentMovie.RentalPrice.ToString("0.00")</td>
+                </tr>
+                ;
+            }
+        }
+    </tbody>
+</table>
