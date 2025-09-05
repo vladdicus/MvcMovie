@@ -21,11 +21,30 @@ namespace MvcMovies.Controllers
             new Product { Id = 3, Title = "The Incredibles", Genre = "Animation", CopiesAvailable = 6, RentalPrice = 1.99m }
         };
 
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
             mylogger.LogInformation("Index called");
-            return View(_products);
+            // if there isn't a search term, return all products via the default view
+            if (string.IsNullOrEmpty(search))
+            {
+                return View(_products);
+            }
+
+            // use ToUpper to make the search case-insensitive
+            string upperSearch = search.ToUpper();
+
+            // use FindAll to filter products by title or genre
+
+            // EXAMPLE AS TO HOW TO USE IT WITH THE URL
+            // /Product/Index?search=godfather after localhost with port url in browsera
+            var filtered = _products.FindAll(p =>
+                p.Title.ToUpper().Contains(upperSearch) ||
+                p.Genre.ToUpper().Contains(upperSearch));
+
+            return View(filtered);
         }
+
+
 
         [HttpGet]
         public IActionResult Create()
