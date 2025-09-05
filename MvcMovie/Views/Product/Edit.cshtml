@@ -1,0 +1,35 @@
+﻿@model MvcMovies.Models.Product
+
+@{
+    ViewData["Title"] = "Edit Movie";
+}
+<!-- create the edit movie view so that you can actually change the features of each movie if needed to line up with a CRUD application's basic requirements to be defined as CRUD-->
+<h1>Edit Movie</h1>
+
+<form asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div>
+        <label asp-for="Title"></label>
+        <input asp-for="Title" />
+    </div>
+
+    <div>
+        <label asp-for="Genre"></label>
+        <input asp-for="Genre" />
+    </div>
+
+    <div>
+        <label asp-for="CopiesAvailable"></label>
+        <input asp-for="CopiesAvailable" />
+    </div>
+
+    <div>
+        <label asp-for="RentalPrice"></label>
+        <input asp-for="RentalPrice" />
+    </div>
+
+    <button type="submit">Save</button>
+    <a asp-action="Index">Cancel</a>
+</form>
