@@ -7,6 +7,13 @@ namespace MvcMovies.Controllers
 {
     public class ProductController : Controller
     {
+        private readonly ILogger<ProductController> mylogger;
+
+        public ProductController(ILogger<ProductController> logger)
+        {
+            mylogger = logger;
+        }
+
         private static List<Product> _products = new List<Product>
         {
             new Product { Id = 1, Title = "TENET", Genre = "Sci-Fi", CopiesAvailable = 4, RentalPrice = 3.99m },
@@ -16,23 +23,28 @@ namespace MvcMovies.Controllers
 
         public IActionResult Index()
         {
+            mylogger.LogInformation("Index called");
             return View(_products);
         }
 
         [HttpGet]
         public IActionResult Create()
         {
+            mylogger.LogInformation("Create GET called");
             return View(new Product());
         }
 
         [HttpPost]
         public IActionResult Create(Product product)
         {
+            mylogger.LogInformation("Create POST called");
             if (!ModelState.IsValid)
             {
+                mylogger.LogInformation("Model state is invalid");
                 return View(product);
             }
 
+            mylogger.LogInformation("Model state is valid, adding product");
             product.Id = _products.Count + 1;
             _products.Add(product);
 
